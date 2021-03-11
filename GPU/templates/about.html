@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'favicon/favicon.png' %}"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PC Easy - Compare preços</title>
+        <div class="hPCEasy">
+            <a href="{% url 'home' %}" ><img class="LogoPCEasy" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-perspective="500" src="{% static 'favicon/favicon.png' %}" width="300" height="180" /></a>
+        </div>
+
+        <style>/*CSS do Header e Navbar*/
+        .hPCEasy{
+        justify-content: center;
+        max-height: 250px;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.548);    
+        }
+
+        .LogoPCEasy{
+        justify-content: center;
+        align-items: center;
+        text-align: center;    
+        max-height: 250px;
+        }
+
+        body{
+            margin:0px;
+            background: url(https://i.imgur.com/ewmbMTw.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            }   
+
+        .AboutDesc{
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            justify-content: center;
+            height: 400px;
+            margin: 3% 10% 0% 10%;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.548);  
+        }
+        h1{
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 1px 1px 1px rgb(0, 0, 0);
+            color: white;
+            box-shadow: 
+            0px 0px 20px #ec5f01,
+            inset 0px 0px 20px #ec5f01,
+            0px 0px 120px #ff00c8,
+            inset 0px 0px 60px #ff00c8;
+            background-color: rgba(0, 0, 0, 0.877);
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        p{
+            margin: 0% 10% 0% 10%;
+            color: white;
+            text-shadow: 1px 1px 1px rgb(0, 0, 0);
+            font-size: larger;
+            text-align:justify;
+            text-justify: inter-word;
+        }
+        .p2{
+            font-style: italic;
+        }
+        .bottomAbout{
+            text-align:end;
+        }
+        </style>
+    </head>
+
+
+<body>
+    <div class="AboutDesc">
+        <h1>Sobre:</h1>
+        <p>PC Easy é uma ferramenta para ajudar usuários a encontrarem os melhores preços em lojas de informáticas espcializadas. A total responsabilidade sobre o produto são das empresas indexadas assim como o suporte dos mesmos.
+        </p><br><br><br>
+        <p class="p2">
+            Nunca forneça suas informações pessoais à nenhum domínio que não seja a sua loja de interesse! 
+        </p>
+        <br><br><br><br><br><br><br><br>
+        <p class="bottomAbout">
+            PC Easy.
+        </p>
+    </div>
+
+    <footer>
+        <p><a class="FooterLogoADM" href="{% url 'home' %}" ><img class="FooterLogo" data-tilt data-tilt-max="5" data-tilt-speed="1000" data-tilt-perspective="100" src="{% static 'favicon/favicon.png' %}" width="120" height="80" /></a>
+        </p>
+            <a class="SobreTag" href="{% url 'home' %}">Home</a>
+            ● PC Easy - Compare preços ●
+        <a class="SobreTag" href="{% url 'about' %}">Sobre</a>
+    </footer>
+    <style>
+        footer{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 10% 0% 0% 0%;
+            height: auto;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3px;
+            background-color: rgba(0, 0, 0, 0.925);
+            color: #ec5f01;
+            border: 1px solid black;
+        }
+        .FooterLogoADM{
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        .SobreTag{
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            border: 1px solid black;
+        }
+        .SobreTag:hover{
+            text-decoration: underline;
+        }
+
+    </style>
+    <script src="{% static 'favicon/vanilla-tilt.js' %}"></script>
+</body>
+</html>

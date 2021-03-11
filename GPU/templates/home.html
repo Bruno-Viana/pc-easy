@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+{% load converte_reais %}
+{% load filtro_nome %}
+{% load static %}
+<style>
+
+    .prod{
+        background-color: white;
+    }
+    .Prod-block{
+    position: relative;
+    margin: 10px 100px 75px 100px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(5, 200px);
+    grid-gap: 10px;
+    }
+    .redirect-loja{
+    background-color: black;
+    }
+    .Prod-Nome{
+    margin: 0px 10px 0px 10px;
+    white-space:unset;
+    height: 140px; 
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-justify: auto;
+    text-shadow:            
+    -0.15px -0.15px 0 #000,  
+    0.15px -0.15px 0 #000,
+    -0.15px 0.15px 0 #000,
+    0.15px 0.15px 0 #000;
+    }
+    .redict:link {
+    text-decoration: none;
+    }
+
+    .redict:visited {
+    text-decoration: none;
+    }
+
+    .Prod-Preco-boleto{
+    color:rgb(255, 136, 0);
+    background-color:rgb(0, 0, 0);
+    text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    }
+
+    .Prod-Preco-real{
+    color: rgb(255, 0, 51);
+    background-color:rgb(0, 0, 0);
+    text-shadow:
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    }
+
+    .Prod-IMG:hover{
+        transform: scaleY(1.1) scaleX(1.1);
+    }
+
+    .Pagi{
+        display:flex;
+        margin: 0.5% 0% 0px 0%;
+        justify-content: center;
+    }
+    .btn{
+        text-decoration: none;  
+        padding: 2px;
+        background-color: rgba(0, 0, 0, 0.788);
+        color: white;
+        border: 3px solid #ec5f01;
+        outline: none;
+        font-size: large;
+        border-radius: 5px;
+        text-shadow:            
+            -0.15px -0.15px 0 #000,  
+            0.15px -0.15px 0 #000,
+            -0.15px 0.15px 0 #000,
+            0.15px 0.15px 0 #000;
+    
+    }
+    .btnAtual{
+        text-decoration: none;
+        color: #ec5f01;
+        padding: 2px;
+        background-color: rgba(0, 0, 0, 0.788);
+        border: 3px solid #ec5f01;
+        outline: none;
+        font-size: larger;
+        border-radius: 5px;
+        text-shadow:            
+            -0.15px -0.15px 0 #000,  
+            0.15px -0.15px 0 #000,
+            -0.15px 0.15px 0 #000,
+            0.15px 0.15px 0 #000;
+    }
+
+</style>
+
+
+
+
+{% for produto in Produtos %}
+
+<div class="prod">
+    <div class="redirect-loja">
+        {% if 'terabyte' in produto.prod_url %}
+        <a class="Tlog" href={{produto.prod_url}} target="_blank">
+            <img class="TerabyteLogo" src="https://img.terabyteshop.com.br/footer-logo.png" width="160"
+                height="60" /></a>
+        {% elif 'pichau' in produto.prod_url %}
+        <a class="Plog" href={{produto.prod_url}} target="_blank">
+            <img class="PichauLogo"
+                src="https://www.pichau.com.br/static/version1602841622/frontend/Pichau/base/pt_BR/images/logo-pichau.png"
+                width="160" height="60" /></a>
+        {% elif 'kabum' in produto.prod_url %}
+        <a class="Klog" href={{produto.prod_url}} target="_blank">
+            <img class="KabumLogo" src="https://static.kabum.com.br/conteudo/temas/001/imagens/topo/logo_kabum_.png"
+                width="160" height="60" /></a>
+        {% endif %}
+    </div>
+    <div class="Prod-IMG"><br>
+        <a href={{produto.prod_url}} target="_blank"><img src="{{produto.img_url}}" width="120" height="120"/></a></br>
+    </div>
+    <div class="Prod-Nome">
+        {% if 'terabyte' in produto.prod_url %}
+        <p><a class="redict" href={{produto.prod_url}} target="_blank">{{produto.nome|nome_format_tera}}</a></p>
+        {% elif 'pichau' in produto.prod_url %}
+        <p><a class="redict" href={{produto.prod_url}} target="_blank">{{produto.nome|nome_format_pichau}}</a></p>
+        {% elif 'kabum' in produto.prod_url %}
+        <p><a class="redict" href={{produto.prod_url}} target="_blank">{{produto.nome|nome_format_kabum}}</a></p>
+        {% endif %}
+        <style>
+            .redict {
+                color: #000;
+            }
+        </style>
+    </div>
+    <div class="Prod-Preco-boleto">
+        <strong>R$ {{produto.price_boleto|em_reais}}</strong>
+        <br> À vista no boleto.</br>
+    </div>
+
+    <div class="Prod-Preco-real">
+        <strong>R$ {{produto.realprice|em_reais}}</strong>
+        <br>Sem juros.</br>
+    </div>
+
+</div>
+{% endfor %}
+{% if is_paginated and 'searchPC' not in request.get_full_path %} 
+        <div class="PagiBot">        
+            {% if page_obj.number != 1 %}
+                <a class="btn" href="?page=1">Primeira</a>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btnAtual" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                <a class="btn" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a class="btn" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+            {% endif %}
+            <style>
+            .PagiBot{
+                display:flex;
+                margin: 0px 0px 0px 520%;
+                justify-content: flex-end;
+            }
+            </style>
+        </div>
+{% endif %}
+{% endblock %}
